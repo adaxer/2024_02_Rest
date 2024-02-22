@@ -19,6 +19,7 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
+            // Nur devmode
             app.UseSwagger();
             app.UseSwaggerUI();
         }
