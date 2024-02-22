@@ -4,3 +4,20 @@ GET {{MovieBase.Api_HostAddress}}/movies/list
 Accept: application/json
 
 ###
+
+GET {{MovieBase.Api_HostAddress}}/movies/details/1
+Accept: application/json
+
+###
+
+POST {{MovieBase.Api_HostAddress}}/movies/create
+Content-Type: application/json
+
+{
+    "Title": "Stargate",
+    "Director": "Egal"
+}
+
+###
+
+
