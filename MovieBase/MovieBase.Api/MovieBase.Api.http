@@ -1,6 +1,6 @@
 @MovieBase.Api_HostAddress = https://localhost:7184
 
-GET {{MovieBase.Api_HostAddress}}/movies/
+GET {{MovieBase.Api_HostAddress}}/movies/list
 Accept: application/json
 
 ###
