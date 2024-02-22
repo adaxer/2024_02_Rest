@@ -1,0 +1,6 @@
+@VSApp_HostAddress = http://localhost:5230
+
+GET {{VSApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

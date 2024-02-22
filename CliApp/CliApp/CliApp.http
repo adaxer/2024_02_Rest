@@ -1,0 +1,6 @@
+@CliApp_HostAddress = http://localhost:5139
+
+GET {{CliApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
