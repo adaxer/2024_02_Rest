@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MovieBase.Common;
 using MovieBase.Common.Data;
+using System.Diagnostics;
 
 namespace MovieBase.Api;
 
@@ -23,6 +24,9 @@ public class Program
 
         var app = builder.Build();
 
+        // Seed Database with movies
+        SeedDemoData(app.Services);
+
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
@@ -39,5 +43,21 @@ public class Program
         app.MapControllers();
 
         app.Run();
+    }
+
+    private static void SeedDemoData(IServiceProvider services)
+    {
+        using var scope = services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<MoviesContext>();
+        try
+        {
+            var watch = Stopwatch.StartNew();
+            db.SeedData();
+            Trace.TraceInformation($"Database seed took: {watch.Elapsed}");
+        }
+        catch (Exception ex)
+        {
+            Trace.TraceError($"Seeding failed: {ex}");
+        }
     }
 }
