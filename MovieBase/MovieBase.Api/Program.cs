@@ -15,12 +15,18 @@ public class Program
         // Add services to the container.
         builder.Services.AddScoped<MovieService>();
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers()
+            .AddNewtonsoftJson()
+            .AddXmlSerializerFormatters();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddDbContext<MoviesContext>(o => o.UseSqlite(builder.Configuration.GetConnectionString("MovieConnection")));
+
+        builder.Services.AddSignalR(c => c.KeepAliveInterval = TimeSpan.FromSeconds(15));
+
+        builder.Services.AddHostedService<MessageService>();
 
         var app = builder.Build();
 
@@ -41,6 +47,7 @@ public class Program
 
 
         app.MapControllers();
+        app.MapHub<MessageHub>("/messages");
 
         app.Run();
     }

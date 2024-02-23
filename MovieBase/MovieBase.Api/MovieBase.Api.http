@@ -1,11 +1,11 @@
 @MovieBase.Api_HostAddress = https://localhost:7184
 
 GET {{MovieBase.Api_HostAddress}}/movies/list
-Accept: application/json
+Accept: application/xml
 
 ###
 
-GET {{MovieBase.Api_HostAddress}}/movies/details/1
+GET {{MovieBase.Api_HostAddress}}/movies/details/2
 Accept: application/json
 
 ###
@@ -20,4 +20,28 @@ Content-Type: application/json
 
 ###
 
+PUT {{MovieBase.Api_HostAddress}}/movies/update
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "Title": "Blade Runner",
+    "Director": "Ridley Scott"
+}
+
+###
+
+
+PATCH {{MovieBase.Api_HostAddress}}/movies/patch/2
+Content-Type: application/json
+
+[
+  {
+    "path": "/Title",
+    "op": "replace",
+    "value": "SomeMovie"
+  }
+]
+
+###
 
