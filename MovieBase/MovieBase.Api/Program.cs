@@ -1,5 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
 using MovieBase.Common;
+using MovieBase.Common.Data;
 
 namespace MovieBase.Api;
 
@@ -16,6 +18,8 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddDbContext<MoviesContext>(o => o.UseSqlite(builder.Configuration.GetConnectionString("MovieConnection")));
 
         var app = builder.Build();
 
